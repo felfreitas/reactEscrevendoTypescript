@@ -4,8 +4,11 @@ import Item from './Item';
 
 import style from './Lista.module.scss';
 
-
-function Lista( {tarefas}: {tarefas: ITarefa[]}) {
+interface Props {
+    tarefas: ITarefa[],
+    selecionaTarefa: (tarefaSelecionada: ITarefa) => void
+}
+function Lista({ tarefas, selecionaTarefa }: Props) {
 
 
     return (
@@ -14,16 +17,17 @@ function Lista( {tarefas}: {tarefas: ITarefa[]}) {
 
             <ul>
                 {
-                    tarefas.map((item, index)=>(
-                        <Item  
-                            key={index}
+                    tarefas.map(item => (
+                        <Item
+                            selecionaTarefa={selecionaTarefa}
+                            key={item.id}
                             {...item}
-                        
+
                         />
                     ))
                 }
 
-              
+
             </ul>
         </aside>
     )
